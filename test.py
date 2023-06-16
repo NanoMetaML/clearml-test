@@ -31,9 +31,12 @@ task.connect(params)
 # create a PyTorch model
 model = nn.Sequential(nn.Linear(params['in_dim'], params['h_dim']), nn.ReLU(), nn.Linear(params['h_dim'], 1))
 
-# create a dummy PyTorch dataset
+# create a dummy PyTorch dataset using a random 
 x = torch.randn(params['num_samples'], params['in_dim'])
-y = torch.randn(params['num_samples'], 1)
+
+
+
+y = torch.pow(x, 2) @ torch.randn(params['in_dim'], 1) + torch.randn(params['num_samples'], 1)
 
 # create a loss function
 loss_fn = nn.MSELoss()
