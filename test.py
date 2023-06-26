@@ -19,10 +19,10 @@ task = Task.init(
 )
 
 params = {
-        device: 'cuda', # Options: cuda, cpu
-        in_dim: 10,
-        h_dim: 8,
-        num_samples: 100,
+        'device': 'cuda', # Options: cuda, cpu
+        'in_dim': 10,
+        'h_dim': 8,
+        'num_samples': 100,
         }
 
 # tell clearml about our parameters
@@ -33,8 +33,6 @@ model = nn.Sequential(nn.Linear(params['in_dim'], params['h_dim']), nn.ReLU(), n
 
 # create a dummy PyTorch dataset using a random 
 x = torch.randn(params['num_samples'], params['in_dim'])
-
-
 
 y = torch.pow(x, 2) @ torch.randn(params['in_dim'], 1) + torch.randn(params['num_samples'], 1)
 
@@ -69,5 +67,5 @@ for t in range(100):
 torch.save(model.state_dict(), "model.pt")
 
 # upload the model
-task.upload_artifact("model.pt", artifact_target_path="model.pt")
+task.upload_artifact(name="model.pt", artifact_object="./model.pt")
 
